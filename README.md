@@ -38,8 +38,19 @@ npm run dev
 
 This will start the Vite development server and you can view the application in your browser at http://localhost:3000.
 
+### Building for Production
+To build the project for production, run:
+
+```sh
+npm run build
+```
+
+This will create an optimized build in the dist directory.
+
+
 ### Previewing the Production Build
 To preview the production build, run:
+
 ```sh
 npm run preview
 ```
