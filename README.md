@@ -18,7 +18,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/Amadou-dot/worldwise
+    git clone https://github.com/Amadou-dot/worldwise.git
     cd worldwise
     ```
 
