@@ -8,7 +8,7 @@ export default function Homepage() {
       <section>
         <h1>
           You travel the world.
-          <br />
+          <br />  
           WorldWise keeps track of your adventures.
         </h1>
         <h2>
