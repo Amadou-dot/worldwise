@@ -3,5 +3,9 @@ import Button from './Button';
 export default function ButtonBack() {
   const navigate = useNavigate();
 
-  return <Button onClick={() => navigate(-1)} type='back'>Back</Button>
+  return (
+    <Button onClick={() => navigate(-1)} type='back'>
+      Back
+    </Button>
+  );
 }

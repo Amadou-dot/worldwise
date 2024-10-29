@@ -1,13 +1,11 @@
-import { ICity } from '../types/ICity';
+import { useCities } from '../context/useCities';
 import CityItem from './CityItem';
 import styles from './CityList.module.css';
 import Message from './Message';
 import Spinner from './Spinner';
-interface ICityList {
-  cities: ICity[];
-  isLoading: boolean;
-}
-export default function CityList({ cities, isLoading }: ICityList) {
+
+export default function CityList() {
+  const { cities, isLoading } = useCities();
   if (isLoading) return <Spinner />;
   if (!cities.length)
     return <Message message='Click a city on the map to start!' />;

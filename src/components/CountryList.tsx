@@ -1,14 +1,11 @@
-import { ICity } from '../types/ICity';
+import { useCities } from '../context/useCities';
 import CountryItem from './CountryItem';
 import styles from './CountryList.module.css';
 import Message from './Message';
 import Spinner from './Spinner';
-interface ICountry {
-  cities: ICity[];
-  isLoading: boolean;
-}
 
-export default function CountryList({ cities, isLoading }: ICountry) {
+export default function CountryList() {
+  const { cities, isLoading } = useCities();
   if (isLoading) return <Spinner />;
   if (!cities.length) return <Message message='No countries to show' />;
   const uniqueCountries = Array.from(new Set(cities.map(city => city.country)));

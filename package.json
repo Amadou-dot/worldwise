@@ -11,12 +11,17 @@
     "server": "json-server src/data/db.json --port 5000 "
   },
   "dependencies": {
+    "country-flag-emoji-polyfill": "^0.1.8",
     "json-server": "^1.0.0-beta.1",
+    "leaflet": "^1.9.4",
     "react": "^18.3.1",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",

@@ -3,13 +3,22 @@ interface IButton {
   children: React.ReactNode;
   onClick: () => void;
   type: 'primary' | 'back' | 'position';
+  disabled?: boolean;
 }
-export default function Button( { children, onClick, type }: IButton): JSX.Element {
+export default function Button({
+  children,
+  onClick,
+  type,
+  disabled,
+}: IButton): JSX.Element {
   return (
-    <button onClick={e => {
-      e.preventDefault();
-      onClick();
-    }} className={`${styles.btn} ${styles[type]}`}>
+    <button
+      disabled={disabled}
+      onClick={e => {
+        e.preventDefault();
+        onClick();
+      }}
+      className={`${styles.btn} ${styles[type]}`}>
       {children}
     </button>
   );

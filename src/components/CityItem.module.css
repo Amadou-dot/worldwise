@@ -21,6 +21,7 @@
 }
 
 .emoji {
+  font-family: "Twemoji Country Flags";
   font-size: 2.6rem;
   line-height: 1;
 }

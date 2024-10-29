@@ -7,7 +7,7 @@ interface ICountry {
 function CountryItem({ country }: { country: ICountry }) {
   return (
     <li className={styles.countryItem}>
-      <span>{country.emoji}</span>
+      <span className='emoji'>{country.emoji}</span>
       <span>{country.country}</span>
     </li>
   );

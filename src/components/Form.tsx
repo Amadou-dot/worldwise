@@ -1,19 +1,64 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import styles from './Form.module.css';
 import ButtonBack from './Buttons/ButtonBack';
 import ButtonAdd from './Buttons/ButtonAdd';
-
+import { useURLPosition } from '../hooks/useURLPosition';
+import { convertToEmoji } from '../helpers/convertToEmoji';
+import Message from './Message';
+import Spinner from './Spinner';
+const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 function Form() {
+  // get the latitude and longitude from the URL
+  const { latitude: lat, longitude: lng } = useURLPosition();
+  const [isLoadingGeoData, setIsLoadingGeoData] = useState(false);
   const [cityName, setCityName] = useState('');
   const [country, setCountry] = useState('');
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState('');
+  const [emoji, setEmoji] = useState('');
+  const [error, setError] = useState('');
 
+  // use reverse geocoding to get the city name and country based on where the user clicked on the map
+  useEffect(() => {
+    if (!lat || !lng) return;
+    async function fetchCityData() {
+      try {
+        setError('');
+        setIsLoadingGeoData(true);
+        const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
+        const data = await res.json();
+        if (!data.countryCode)
+          throw new Error(
+            "There's no city there! Click somewhere closer to a city."
+          );
+        setCityName(data.city.length ? data.city : data.locality);
+        setCountry(data.countryName);
+        setEmoji(convertToEmoji(data.countryCode));
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      } finally {
+        setIsLoadingGeoData(false);
+      }
+    }
+    fetchCityData();
+  }, [lat, lng]);
+
+  // handle form submission
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const trip = { city: cityName, country, date, notes };
+    console.log(trip);
+  }
+  
+  if (!lat || !lng) return <Message message='No location data found. Start by clicking on the map' />;
+  if (isLoadingGeoData) return <Spinner />;
+  if (error) return <Message message={error} />;
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor='cityName'>City name</label>
         <input
@@ -21,7 +66,7 @@ function Form() {
           onChange={e => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={`${styles.flag}`}>{emoji}</span>
       </div>
 
       <div className={styles.row}>

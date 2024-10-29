@@ -2,28 +2,32 @@ import styles from './City.module.css';
 import { formatDate } from '../helpers/formatDate';
 import ButtonBack from './Buttons/ButtonBack';
 import { useParams } from 'react-router-dom';
-import { ICity } from '../types/ICity';
+import { useCities } from '../context/useCities';
+import { useEffect } from 'react';
+import Spinner from './Spinner';
 
-function City( {cities}: {cities: ICity[]} ) {
+function City() {
   const { id } = useParams();
-  if (!id) return null;
-  const currentCity = cities.find((city) => city.id === parseInt(id));
-  if (!currentCity) return null;
-
+  const { getCityById, currentCity, isLoading } = useCities();
+  useEffect(() => {
+    getCityById(id as string);
+  }, [id]);
   const { cityName, emoji, date, notes } = currentCity;
 
+  
+  if (isLoading) return <Spinner />;
   return (
     <div className={styles.city}>
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <span className='emoji'>{emoji}</span> {cityName}
         </h3>
       </div>
 
       <div className={styles.row}>
         <h6>You went to {cityName} on</h6>
-        <p>{formatDate(date, true)}</p>
+        <p>{date && formatDate(date)}</p>
       </div>
 
       {notes && (
