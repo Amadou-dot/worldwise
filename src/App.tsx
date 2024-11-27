@@ -10,10 +10,12 @@ import CountryList from './components/CountryList';
 import City from './components/City';
 import Form from './components/Form';
 import { CitiesProvider } from './context/CitiesContext';
+import { AuthProvider } from './context/AuthProvider';
 export default function App() {
   
   return (
-    <CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
     <BrowserRouter>
       <Routes>
         <Route index element={<Homepage />} />
@@ -31,6 +33,7 @@ export default function App() {
       </Routes>
     </BrowserRouter>
     </CitiesProvider>
+    </AuthProvider>
 
   );
 }

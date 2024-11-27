@@ -71,18 +71,6 @@
         "lng": 115.857048
       },
       "id": "11223345"
-    },
-    {
-      "id": "12019828",
-      "cityName": "London",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "date": "2024-11-27T08:48:24.800Z",
-      "notes": "",
-      "emoji": "🇬🇧",
-      "position": {
-        "lat": 51.51643437722083,
-        "lng": -0.17869949340820315
-      }
     }
   ]
 }

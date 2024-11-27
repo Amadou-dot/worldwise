@@ -1,10 +1,11 @@
 import React, { createContext, useEffect } from 'react';
 import { ICity } from '../types/ICity';
 const BASEURL = 'http://localhost:5000';
-interface IContext {
+
+export interface IContext {
   cities: ICity[];
   isLoading: boolean;
-  currentCity: ICity;
+  currentCity: ICity | null;
   getCityById: (id: string) => Promise<void>;
   addCity: (city: ICity) => Promise<void>;
   deleteCity: (id: string) => Promise<void>;
@@ -15,9 +16,7 @@ interface IState {
   currentCity: ICity | null;
   error: string | null;
 }
-
 type Payload = { cities: ICity[] } | { city: ICity } | { id: string } | string;
-
 interface Action {
   type: string;
   payload?: Payload;
@@ -27,7 +26,7 @@ export const CitiesContext = createContext({} as IContext);
 const initialState: IState = {
   cities: [],
   isLoading: false,
-  currentCity: {} as ICity,
+  currentCity: null,
   error: null,
 };
 
@@ -51,7 +50,7 @@ function reducer(state: IState, action: Action): IState {
       return {
         ...state,
         cities: [...state.cities, (action.payload as { city: ICity }).city],
-        isLoading: false,
+        isLoading: false, currentCity: (action.payload as { city: ICity }).city,
       };
     case 'city/deleted':
       return {
@@ -59,7 +58,7 @@ function reducer(state: IState, action: Action): IState {
         cities: state.cities.filter(
           city => city.id !== (action.payload as { id: string }).id
         ),
-        isLoading: false,
+        isLoading: false, currentCity: null,
       };
     case 'rejected':
       return { ...state, isLoading: false, error: action.payload as string };
@@ -96,6 +95,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
    * @param id
    */
   async function getCityById(id: string) {
+    if ( currentCity && id === currentCity.id) return ;
     dispatch({ type: 'cities/loading' });
     try {
       const response = await fetch(`${BASEURL}/cities/${id}`);
@@ -147,7 +147,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
       value={{
         cities,
         isLoading,
-        currentCity: currentCity as ICity,
+        currentCity,
         getCityById,
         addCity,
         deleteCity,
