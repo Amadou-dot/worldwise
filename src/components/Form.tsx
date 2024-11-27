@@ -1,6 +1,6 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Form.module.css';
 import ButtonBack from './Buttons/ButtonBack';
 import ButtonAdd from './Buttons/ButtonAdd';
@@ -8,18 +8,26 @@ import { useURLPosition } from '../hooks/useURLPosition';
 import { convertToEmoji } from '../helpers/convertToEmoji';
 import Message from './Message';
 import Spinner from './Spinner';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CitiesContext } from '../context/CitiesContext';
+import { useNavigate } from 'react-router-dom';
 const BASE_URL = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 function Form() {
+  const navigate = useNavigate();
   // get the latitude and longitude from the URL
   const { latitude: lat, longitude: lng } = useURLPosition();
   const [isLoadingGeoData, setIsLoadingGeoData] = useState(false);
   const [cityName, setCityName] = useState('');
   const [country, setCountry] = useState('');
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState<Date | null>(new Date());
   const [notes, setNotes] = useState('');
   const [emoji, setEmoji] = useState('');
   const [error, setError] = useState('');
-
+  const {addCity, isLoading} = useContext(CitiesContext);
+  function genId() {
+    return Math.random().toString(10).slice(2,10);
+  }
   // use reverse geocoding to get the city name and country based on where the user clicked on the map
   useEffect(() => {
     if (!lat || !lng) return;
@@ -27,6 +35,7 @@ function Form() {
       try {
         setError('');
         setIsLoadingGeoData(true);
+        setDate(new Date()); // reset date to today
         const res = await fetch(`${BASE_URL}?latitude=${lat}&longitude=${lng}`);
         const data = await res.json();
         if (!data.countryCode)
@@ -48,17 +57,23 @@ function Form() {
   }, [lat, lng]);
 
   // handle form submission
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const trip = { city: cityName, country, date, notes };
-    console.log(trip);
+    const trip = { cityName, country, date, notes };
+    if (!trip.cityName) return setError('Please enter a city name');
+    const newCity = { ...trip, date: date?.toISOString() || null, emoji, position: { lat, lng }, id: genId() };
+    await addCity(newCity);
+    navigate('/app/cities');
   }
-  
-  if (!lat || !lng) return <Message message='No location data found. Start by clicking on the map' />;
+
+  if (!lat || !lng)
+    return (
+      <Message message='No location data found. Start by clicking on the map' />
+    );
   if (isLoadingGeoData) return <Spinner />;
   if (error) return <Message message={error} />;
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={`${styles.form} ${isLoading? 'loading':''}`} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor='cityName'>City name</label>
         <input
@@ -71,11 +86,7 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor='date'>When did you go to {cityName}?</label>
-        <input
-          id='date'
-          onChange={e => setDate(new Date(e.target.value))}
-          value={new Date(date).toISOString()}
-        />
+        <DatePicker id='date' selected={date} onChange={date => setDate(date)} dateFormat='MM/dd/yyyy' />
       </div>
 
       <div className={styles.row}>

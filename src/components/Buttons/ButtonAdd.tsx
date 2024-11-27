@@ -1,7 +1,7 @@
 import Button from './Button';
 export default function ButtonAdd() {
   return (
-    <Button onClick={() => {}} type='primary'>
+    <Button style='primary' type='submit'>
       Add
     </Button>
   );

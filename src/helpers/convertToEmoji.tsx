@@ -1,4 +1,8 @@
-
+/**
+ * Convert a country code to an emoji flag
+ * @param countryCode 
+ * @returns the emoji flag
+ */
 export function convertToEmoji(countryCode: string) {
   const codePoints = countryCode
     .toUpperCase()
