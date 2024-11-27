@@ -49,18 +49,6 @@
       "id": "12345678"
     },
     {
-      "cityName": "New York",
-      "country": "USA",
-      "emoji": "🇺🇸",
-      "date": "2027-11-01T10:00:00.000Z",
-      "notes": "The city that never sleeps",
-      "position": {
-        "lat": 40.712776,
-        "lng": -74.005974
-      },
-      "id": "87654321"
-    },
-    {
       "cityName": "Sydney",
       "country": "Australia",
       "emoji": "🇦🇺",
@@ -85,15 +73,15 @@
       "id": "11223345"
     },
     {
-      "id": "70588939",
-      "cityName": "Tewin",
+      "id": "12019828",
+      "cityName": "London",
       "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "date": "2024-11-27T05:12:25.717Z",
-      "notes": "test",
+      "date": "2024-11-27T08:48:24.800Z",
+      "notes": "",
       "emoji": "🇬🇧",
       "position": {
-        "lat": 51.819489577594,
-        "lng": -0.16239491708407663
+        "lat": 51.51643437722083,
+        "lng": -0.17869949340820315
       }
     }
   ]
