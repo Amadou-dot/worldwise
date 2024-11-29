@@ -11,11 +11,10 @@ function City() {
   const { getCityById, currentCity, isLoading } = useCities();
   useEffect(() => {
     getCityById(id as string);
-  }, [id]);
+  }, [id, getCityById]);
   if (!currentCity) return null;
   const { cityName, emoji, date, notes } = currentCity;
 
-  
   if (isLoading) return <Spinner />;
   return (
     <div className={styles.city}>

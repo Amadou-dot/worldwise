@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext, useCallback, useEffect } from 'react';
 import { ICity } from '../types/ICity';
 const BASEURL = 'http://localhost:5000';
 
@@ -94,7 +94,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
    * Get data for a specific city
    * @param id
    */
-  async function getCityById(id: string) {
+  const getCityById = useCallback(async function getCityById(id: string) {
     if ( currentCity && id === currentCity.id) return ;
     dispatch({ type: 'cities/loading' });
     try {
@@ -104,7 +104,7 @@ function CitiesProvider({ children }: { children: React.ReactNode }) {
     } catch (error) {
       dispatch({ type: 'rejected', payload: 'Error getting city data' });
     }
-  }
+  },[currentCity]);
 
   /**
    * Add a city to the database

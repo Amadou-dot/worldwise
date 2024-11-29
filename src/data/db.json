@@ -49,18 +49,6 @@
       "id": "12345678"
     },
     {
-      "cityName": "Sydney",
-      "country": "Australia",
-      "emoji": "🇦🇺",
-      "date": "2027-03-14T09:00:00.000Z",
-      "notes": "Beautiful beaches",
-      "position": {
-        "lat": -33.86882,
-        "lng": 151.209296
-      },
-      "id": "11223344"
-    },
-    {
       "cityName": "Perth",
       "country": "Australia",
       "emoji": "🇦🇺",
@@ -71,6 +59,18 @@
         "lng": 115.857048
       },
       "id": "11223345"
+    },
+    {
+      "id": "20755818",
+      "cityName": "London",
+      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
+      "date": "2024-10-29T22:45:54.000Z",
+      "notes": "rtrthfh",
+      "emoji": "🇬🇧",
+      "position": {
+        "lat": 51.5564754566401,
+        "lng": -0.3833198547363282
+      }
     }
   ]
 }
