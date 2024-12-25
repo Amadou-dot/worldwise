@@ -12,7 +12,7 @@ export default function Login() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (isAuthenticated) navigate('/app', {replace: true});
+    if (isAuthenticated) navigate('/worldwise/app', {replace: true});
   }, [isAuthenticated,navigate]);
 const handleLogin = (e: React.FormEvent) => {
   e.preventDefault();

@@ -10,7 +10,7 @@ export default function ProtectedRoute({
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isAuthenticated) navigate('/login'); // redirect to login page if not authenticated
+    if (!isAuthenticated) navigate('/worldwise/login'); // redirect to login page if not authenticated
   }, [isAuthenticated, navigate]);
   return <>{isAuthenticated ? children : null}</>;
 }

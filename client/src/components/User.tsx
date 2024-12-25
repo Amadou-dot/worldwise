@@ -9,7 +9,7 @@ function User() {
 
   function handleClick() {
     logout();
-    navigate('/');
+    navigate('/worldwise');
   }
 
   return (

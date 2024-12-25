@@ -25,19 +25,19 @@ export default function App() {
         <BrowserRouter>
           <Suspense fallback={<SpinnerFullPage />}>
             <Routes>
-              <Route index element={<Homepage />} />
-              <Route path='/pricing' element={<Pricing />} />
-              <Route path='/product' element={<Product />} />
-              <Route path='/login' element={<Login />} />
+              <Route path='/' index element={<Homepage />} />
+              <Route path='/worldwise' index element={<Homepage />} />
+              <Route path='/worldwise/pricing' element={<Pricing />} />
+              <Route path='/worldwise/product' element={<Product />} />
+              <Route path='/worldwise/login' element={<Login />} />
               <Route
-                path='/app'
+                path='/worldwise/app'
                 element={
                   <ProtectedRoute>
                     <AppLayout />
                   </ProtectedRoute>
                 }>
                 <Route index element={<Navigate to={'cities'} replace />} />
-                {/* index defines the default sub route redirect*/}
                 <Route path='cities' element={<CityList />} />
                 <Route path='cities/:id' element={<City />} />
                 <Route path='countries' element={<CountryList />} />

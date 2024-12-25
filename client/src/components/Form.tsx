@@ -63,7 +63,7 @@ function Form() {
     if (!trip.cityName) return setError('Please enter a city name');
     const newCity = { ...trip, date: date?.toISOString() || null, emoji, position: { lat, lng }, id: genId() };
     await addCity(newCity);
-    navigate('/app/cities');
+    navigate('/worldwise/app/cities');
   }
 
   if (!lat || !lng)
