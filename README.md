@@ -7,7 +7,7 @@
 <h1 align="center">🌍 WorldWise – Track Your Adventures Around the Globe</h1>
 
 <p align="center">
-  <a href="#" target="_blank">
+  <a href="https://worldwise.aseck.dev/" target="_blank">
     <img src="https://img.shields.io/badge/Live%20Preview-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Preview"/>
   </a>
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
