@@ -7,6 +7,28 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+/* Mobile responsive buttons */
+@media (max-width: 768px) {
+  .btn {
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 1.2rem 2.4rem;
+    font-size: 1.7rem;
+    width: 100%;
+  }
 }
 
 .primary {
@@ -15,10 +37,19 @@
   color: var(--color-dark--1);
 }
 
+.primary:hover {
+  background-color: var(--color-brand--1);
+  transform: translateY(-2px);
+}
+
 .back {
   font-weight: 600;
   background: none;
   border: 1px solid currentColor;
+}
+
+.back:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .position {
@@ -32,5 +63,23 @@
   background-color: var(--color-brand--2);
   color: var(--color-dark--1);
   box-shadow: 0 0.4rem 1.2rem rgba(36, 42, 46, 0.16);
+}
+
+@media (max-width: 768px) {
+  .position {
+    bottom: 2rem;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .position {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    width: calc(100% - 2rem);
+  }
 }
 
