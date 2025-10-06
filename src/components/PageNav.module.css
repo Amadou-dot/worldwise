@@ -2,6 +2,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 
 .nav ul {
@@ -11,6 +20,21 @@
   gap: 4rem;
 }
 
+@media (max-width: 768px) {
+  .nav ul {
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav ul {
+    gap: 1.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 .nav a:link,
 .nav a:visited {
   text-decoration: none;
@@ -18,11 +42,30 @@
   text-transform: uppercase;
   font-size: 1.5rem;
   font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .nav a:link,
+  .nav a:visited {
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* CSS Modules feature */
 .nav a:global(.active) {
   color: var(--color-brand--2);
+  background-color: rgba(255, 181, 69, 0.1);
 }
 
 a.ctaLink:link,
@@ -31,4 +74,17 @@ a.ctaLink:visited {
   color: var(--color-dark--0);
   padding: 0.8rem 2rem;
   border-radius: 7px;
+  transition: all 0.2s;
+}
+
+a.ctaLink:hover {
+  background-color: var(--color-brand--1);
+}
+
+@media (max-width: 768px) {
+  a.ctaLink:link,
+  a.ctaLink:visited {
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+  }
 }
